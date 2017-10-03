@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Workspace</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div class="container">
+  <nav class="navbar bg-faded fixed-top">
+    <h3><%= link_to "Home", root_path, class: "align-left", id: "home" =%></h3>
+    <form class="form-inline align-left">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    <% if !user_signed_in? %>
+      <h4><%= link_to "Sign Up", new_user_registration_path, class: "align-right" =%>
+      <%= link_to "Sign In", new_user_session_path, class: "align-right" =%></h4>
+    <% else %>
+      <h4 class="align-right"><%= link_to "Sign Out", destroy_user_session_path, :method => :delete =%></h4>
+      <h4 class="align-right"><%= current_user.username =%></h4>
+    <% end %>
+  </nav>
+</div>
+<%= yield %>
+
+</body>
+</html>
