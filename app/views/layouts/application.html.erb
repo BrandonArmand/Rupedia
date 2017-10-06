@@ -9,11 +9,7 @@
 <body>
 <div class="container">
   <nav class="navbar bg-faded fixed-top">
-    <h3><%= link_to "Home", root_path, class: "align-left", id: "home" =%></h3>
-    <form class="form-inline align-left">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    <h3><%= link_to "Home", root_path, class: "align-left close-links", id: "home" =%></h3>
     <% if !user_signed_in? %>
       <h4><%= link_to "Sign Up", new_user_registration_path, class: "align-right" =%>
       <%= link_to "Sign In", new_user_session_path, class: "align-right" =%></h4>
@@ -21,8 +17,27 @@
       <h4 class="align-right"><%= link_to "Sign Out", destroy_user_session_path, :method => :delete =%></h4>
       <h4 class="align-right"><%= current_user.username =%></h4>
     <% end %>
+    <form class="form-inline align-right search">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
   </nav>
 </div>
+<div class="col-md-2" id="sidebar">
+  <div class="nav nav-stacked">
+    <h1><%= link_to "Wikis", wikis_path =%></h1>
+    <h4><%= link_to "Create a Wiki", new_wiki_path =%></h4>
+    
+    <% if user_signed_in? %>
+      <h3>Your Wikis</h3>
+      <% current_user.wikis.each do |w| %> 
+        <h4>-<%= link_to w.title, wiki_path(w.id) =%>-</h4>
+      <% end %>
+    <% end %>
+    
+  </div>
+</div>
+
 <%= yield %>
 
 </body>

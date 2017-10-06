@@ -1,0 +1,17 @@
+<div class="container">
+    <%= form_for @wiki do |f| %>
+        <div class="field input-group">
+            <%= f.label :title %>
+            <%= f.text_field :title, autofocus: true, class: "form-control" %>
+        </div>
+        <div class="field input-group">
+            <%= f.label :body %>
+            <%= f.text_area :body, class: "form-control" %>
+        </div>
+        <div class="field radio">
+            <%= f.check_box :private %>
+            <%= f.label :private %>
+        </div>
+        <%= f.submit "Save", class: "btn" %>
+    <% end %>
+</div>

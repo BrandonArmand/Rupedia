@@ -1,0 +1,5 @@
+<div class="container">
+    <% @wikis.each_with_index do |w, i|%>
+        <h1><%=link_to (i + 1), wiki_path(w.id) =%> <%= link_to w.title, wiki_path(w.id) =%></h1>
+    <% end %>
+</div>
