@@ -15,6 +15,9 @@
       <%= link_to "Sign In", new_user_session_path, class: "align-right" =%></h4>
     <% else %>
       <h4 class="align-right"><%= link_to "Sign Out", destroy_user_session_path, :method => :delete =%></h4>
+      <% if current_user.role != nil%>
+        <h4 class="align-right role"><%= current_user.role =%>-user</h4>
+      <% end %>
       <h4 class="align-right"><%= current_user.username =%></h4>
     <% end %>
     <form class="form-inline align-right search">
@@ -29,9 +32,13 @@
     <h4><%= link_to "Create a Wiki", new_wiki_path =%></h4>
     
     <% if user_signed_in? %>
-      <h3>Your Wikis</h3>
-      <% current_user.wikis.each do |w| %> 
-        <h4>-<%= link_to w.title, wiki_path(w.id) =%>-</h4>
+      <% if current_user.wikis.empty? %>
+        <h3>You have no wikis</h3>
+      <% else %>
+        <h3>Your Wikis</h3>
+        <% current_user.wikis.each do |w| %> 
+          <h4>-<%= link_to w.title, wiki_path(w.id) =%>-</h4>
+        <% end %>
       <% end %>
     <% end %>
     

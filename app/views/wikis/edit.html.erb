@@ -1,13 +1,33 @@
 <div class="container">
-    <%= form_for @wiki do |f| %>
-        <div class="field input-group">
-            <%= f.label :title %>
-            <%= f.text_field :title, autofocus: true, class: "form-control" %>
-        </div>
-        <div class="field input-group">
-            <%= f.label :body %>
-            <%= f.text_area :body, class: "form-control" %>
-        </div>
-        <%= f.submit "Save", class: "btn" %>
-    <% end %>
+    <div class="wiki">
+        <%= form_for @wiki do |f| %>
+        
+            <div class="field input-group wiki-title">
+                <%= f.label :title %>
+                <%= f.text_field :title, autofocus: true, class: "form-control" %>
+            </div>
+            
+            <div class="wiki-body">
+                <%= f.label :body %>
+                <%= f.text_area :body, class: "form-control wiki-body" %>
+            </div>
+            
+            <% if private_permission? %>
+                <div class="field radio wiki-private">
+                    <%= f.check_box :private %>
+                    <%= f.label :private %>
+                </div>
+            <% else %>
+                <div class="field radio wiki-private">
+                    <%= f.check_box :private, disabled: true %>
+                    <%= f.label :private %>
+                </div>
+            <% end %>
+            
+            <div class="wiki-save">
+                <%= f.submit "Save", class: "btn" %>
+            </div>
+            
+        <% end %>
+    </div>
 </div>

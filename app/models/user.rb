@@ -5,4 +5,27 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
          
   has_many :wikis
+  
+  enum role: [
+    :standard,
+    :premium,
+    :admin
+  ]
+  
+  def set_admin 
+    self.admin!
+  end
+
+  def set_standard
+    self.standard!
+  end
+  
+  def set_premium
+    self.premium!
+  end
+  
+  def owns?(arg)
+    self.id == arg.user_id
+  end
+
 end

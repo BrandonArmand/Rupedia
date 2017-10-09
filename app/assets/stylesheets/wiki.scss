@@ -1,3 +1,26 @@
-// Place all the styles related to the Wiki controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.wiki{
+    display: flex;
+    justify-content: center;
+}
+
+.wiki-title{
+    
+}
+
+.wiki-body{
+    width: 900px;
+    height: 500px;
+}
+
+.wiki-body textarea{
+    height: 500px;
+}
+
+.wiki-private{
+    margin-top: 3rem;
+}
+
+.wiki-private, .wiki-save{
+    display: flex;
+    justify-content: flex-end;
+}

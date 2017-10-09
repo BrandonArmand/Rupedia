@@ -1,5 +1,6 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "wiki";
 
 .align-right{
     position: relative;
@@ -47,6 +48,10 @@
     background-color: white;
     height: 100%;
     text-align: center;
+}
+
+.role{
+    color: red;
 }
 
 

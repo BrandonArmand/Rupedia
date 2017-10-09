@@ -1,6 +1,6 @@
 class WikisController < ApplicationController
   before_action :authorize_user, except: [:index, :show]
-  before_action :confrim_public, except: [:index, :new, :create]
+  before_action :confirm_access, except: [:index, :new, :create, :show]
   
   
   
@@ -57,16 +57,14 @@ class WikisController < ApplicationController
     end
   end
   
-  def authorize_user
-     unless user_signed_in?
-       redirect_to new_user_session_path
-     end
-  end
   
-  def confrim_public
+  def confirm_access
     wiki = Wiki.find(params[:id])
-    if (wiki.private == true && wiki.user != current_user)
-      redirect_to wikis_path
+    if (wiki.private? == false || current_user.owns?(wiki) || current_user.admin?)
+      true
+    else
+      redirect_to wiki
     end
   end
+  
 end
