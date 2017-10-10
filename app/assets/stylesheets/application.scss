@@ -54,5 +54,24 @@
     color: red;
 }
 
+.signup-info{
+    border-radius: 6px;
+    background-color: rgb(238, 238, 238);
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 343px;
+}
+
+.signup-h2{
+    text-align:center;
+}
+
+.login-form{
+    display: flex;
+    justify-content: center;
+}
 
 

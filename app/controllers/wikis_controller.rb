@@ -1,8 +1,5 @@
 class WikisController < ApplicationController
-  before_action :authorize_user, except: [:index, :show]
-  before_action :confirm_access, except: [:index, :new, :create, :show]
-  
-  
+   before_action :authorize_user, except: [:index, :show]
   
   def index
     @wikis = Wiki.all
@@ -32,15 +29,17 @@ class WikisController < ApplicationController
 
   def edit
     @wiki = Wiki.find(params[:id])
+    authorize @wiki
   end
   
    def update
      @wiki = Wiki.find(params[:id])
- 
+     
+     authorize @wiki
      @wiki.title = params[:wiki][:title]
      @wiki.body = params[:wiki][:body]
      @wiki.private = params[:wiki][:private]
-
+  
      if @wiki.save
        redirect_to @wiki
      else
@@ -50,21 +49,11 @@ class WikisController < ApplicationController
   
   def destroy
     @wiki = Wiki.find(params[:id])
-    
+    authorize @wiki
     if @wiki.destroy
       redirect_to wikis_path
     else
       redirect_to wiki(params[:id])
-    end
-  end
-  
-  
-  def confirm_access
-    wiki = Wiki.find(params[:id])
-    if (wiki.private? == false || current_user.owns?(wiki) || current_user.admin?)
-      true
-    else
-      redirect_to wiki
     end
   end
   

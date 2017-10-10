@@ -25,6 +25,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'devise'
+gem 'pundit'
+gem 'faker', :git => 'git://github.com/stympy/faker.git', :branch => 'master'
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

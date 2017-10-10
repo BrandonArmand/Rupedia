@@ -12,7 +12,7 @@
                 <%= f.text_area :body, class: "form-control wiki-body" %>
             </div>
             
-            <% if private_permission? %>
+            <% if policy(@wiki).private_wiki? %>
                 <div class="field radio wiki-private">
                     <%= f.check_box :private %>
                     <%= f.label :private %>
@@ -20,7 +20,7 @@
             <% else %>
                 <div class="field radio wiki-private">
                     <%= f.check_box :private, disabled: true %>
-                    <%= f.label :private %>
+                    <%= f.label :private %> (Upgrade to Premium!)
                 </div>
             <% end %>
             
