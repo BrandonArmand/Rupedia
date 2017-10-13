@@ -15,8 +15,10 @@
       <%= link_to "Sign In", new_user_session_path, class: "align-right" =%></h4>
     <% else %>
       <h4 class="align-right"><%= link_to "Sign Out", destroy_user_session_path, :method => :delete =%></h4>
-      <% if current_user.role != nil%>
-        <h4 class="align-right role"><%= current_user.role =%>-user</h4>
+      <% if current_user.standard? == false %>
+        <h4 class="align-right role"><%=link_to "#{current_user.role} user", downgrade_path =%></h4>
+      <% else%>
+        <h4><%= link_to "Upgrade to Premium!", new_charge_path, class: "align-right role" %></h4>
       <% end %>
       <h4 class="align-right"><%= current_user.username =%></h4>
     <% end %>

@@ -47,7 +47,6 @@ User.create!(
     username: Faker::GameOfThrones.unique.character,
     email: 'user@gmail.com',
     password: 'user123',
-    role: 'standard'
     )
 
 puts "#{User.count} users created"

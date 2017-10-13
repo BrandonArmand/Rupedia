@@ -1,0 +1,9 @@
+<div class="container">
+    <div class="row flex-column">
+        <h2>Do you want to downgrade back to a Standard User</h2>
+        <div class="flex">
+            <%= link_to 'No Way!', root_path, class: "btn btn-success item" %>
+            <%= link_to 'Downgrade', downgrade_path, :method => :delete, data: { confirm: 'Are you sure you want to return to a standard user?' }, class: "item" %>
+        </div>
+    </div>
+</div>
