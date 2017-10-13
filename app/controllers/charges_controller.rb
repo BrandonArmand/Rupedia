@@ -38,6 +38,7 @@ class ChargesController < ApplicationController
     
     def destroy
         if current_user.standard!
+            current_user.make_wiki_public
             redirect_to root_path
         end
     end

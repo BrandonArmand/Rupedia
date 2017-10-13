@@ -29,4 +29,9 @@ class User < ApplicationRecord
     self.id == arg.user_id
   end
 
+  def make_wiki_public
+    wikis.each do |w|
+      w.update_attributes(private: false); 
+    end
+  end
 end
