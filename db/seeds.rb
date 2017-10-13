@@ -15,7 +15,7 @@ users = User.all
     Wiki.create!(
         user: users.sample, 
         title: Faker::GameOfThrones.unique.character,
-        body: Faker::Lorem.paragraphs(Faker::Number.between(1, 100)),
+        body: Faker::Markdown.random,
         private: Faker::Boolean.boolean
     ) 
 end

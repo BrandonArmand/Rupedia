@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-xs-12 col-md-8">
             <h1><%= @wiki.title =%></h1>
-            <p class="body"><%= simple_format(@wiki.body, class: 'body') =%></p>
+            <p><%= markdown(@wiki.body) =%></p>
         </div>
         <div class="col-xs-6 col-md-4 wiki-info">
             <div class="info-box">
