@@ -1,8 +1,8 @@
 <div class="container">
-    <div class="wiki-index">
+    <div class="col-md-10">
         <% @wikis.each_with_index do |w, i|%>
             <div class="row">
-                <h1><%= link_to w.title, wiki_path(w.id) =%></h1>
+                <h3><%= link_to w.title, wiki_path(w.id) =%></h3>
                 <p><%=truncate(w.body, length: 400) =%></p>
             </div>
         <% end %>

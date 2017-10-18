@@ -5,6 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
          
   has_many :wikis
+  has_many :collaborators
+  has_many :collab_wikis, class_name: "Wiki", through: :collaborators, source: :wiki
+  
   before_save { self.role ||= :standard }
   
   enum role: [
@@ -27,6 +30,10 @@ class User < ApplicationRecord
   
   def owns?(arg)
     self.id == arg.user_id
+  end
+  
+  def premium_permission?
+    self.premium? || self.admin?
   end
 
   def make_wiki_public

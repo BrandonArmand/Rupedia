@@ -7,6 +7,14 @@
     
 }
 
+.wiki-collab{
+    width: 200px;
+}
+
+.wiki-collab input{
+    width: 100%;
+}
+
 .wiki-body{
     width: 900px;
     height: 500px;
@@ -42,6 +50,12 @@
     flex-direction: column;
     align-items: center;
     padding-bottom: 1.5rem;
+}
+
+.info-collaborators{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .delete{

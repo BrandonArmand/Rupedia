@@ -2,11 +2,16 @@ class WikisController < ApplicationController
    before_action :authorize_user, except: [:index, :show]
    
   def index
-    @wikis = Wiki.all
+    @wikis = policy_scope(Wiki)
   end
 
   def show
     @wiki = Wiki.find(params[:id])
+    @collaborators = @wiki.collaborators.all
+    @collab_users = []
+    @collaborators.each do |f|
+      @collab_users << User.find(f.user_id)
+    end
   end
 
   def new
@@ -17,7 +22,11 @@ class WikisController < ApplicationController
     @wiki = current_user.wikis.new
     @wiki.title = params[:wiki][:title]
     @wiki.body = params[:wiki][:body]
-    @wiki.private = params[:wiki][:private]
+    if current_user.premium_permission?
+      @wiki.private = params[:wiki][:private]
+    else
+      @wiki.private = false;
+    end
     @wiki.user = current_user 
     
     if @wiki.save
@@ -38,7 +47,11 @@ class WikisController < ApplicationController
      authorize @wiki
      @wiki.title = params[:wiki][:title]
      @wiki.body = params[:wiki][:body]
-     @wiki.private = params[:wiki][:private]
+     if current_user.premium_permission?
+      @wiki.private = params[:wiki][:private]
+     else
+      @wiki.private = false;
+     end
   
      if @wiki.save
        redirect_to @wiki
