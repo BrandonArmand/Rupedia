@@ -40,7 +40,7 @@
         <% else %>
           <h3>Your Wikis</h3>
           <% current_user.wikis.each do |w| %> 
-            <h4>-<%= link_to w.title, wiki_path(w.id) =%>-</h4>
+            <h4>-<%= link_to w.title, wiki_path(w.slug) =%>-</h4>
           <% end %>
         <% end %>
       <% end %>

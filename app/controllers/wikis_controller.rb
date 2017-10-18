@@ -6,7 +6,7 @@ class WikisController < ApplicationController
   end
 
   def show
-    @wiki = Wiki.find(params[:id])
+    @wiki = Wiki.friendly.find(params[:id])
     @collaborators = @wiki.collaborators.all
     @collab_users = []
     @collaborators.each do |f|
@@ -37,12 +37,12 @@ class WikisController < ApplicationController
   end
 
   def edit
-    @wiki = Wiki.find(params[:id])
+    @wiki = Wiki.friendly.find(params[:id])
     authorize @wiki
   end
   
    def update
-     @wiki = Wiki.find(params[:id])
+     @wiki = Wiki.friendly.find(params[:id])
      
      authorize @wiki
      @wiki.title = params[:wiki][:title]
