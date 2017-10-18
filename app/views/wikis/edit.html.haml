@@ -1,0 +1,30 @@
+.container
+  .wiki
+    .row.col-md-8
+      = form_for @wiki do |f|
+        .field.input-group.wiki-title
+          = f.label :title
+          = f.text_field :title, autofocus: true, class: "form-control"
+        .wiki-body
+          = f.label :body
+          = f.text_area :body, class: "form-control wiki-body"
+        - if policy(@wiki).private_wiki?
+          .field.radio.wiki-private
+            = f.check_box :private
+            = f.label :private
+        - else
+          .field.radio.wiki-private
+            = f.check_box :private, disabled: true
+            = f.label :private
+            (Upgrade to Premium!)
+        .wiki-save
+          = f.submit "Save", class: "btn"
+  - if policy(@wiki).private_wiki?
+    .wiki
+      .row.col-md-8
+        = form_for [@wiki, Collaborator.new] do |f|
+          .field.input-group.wiki-collab
+            .alert-info
+              = flash[:alert]
+            = f.email_field :user, placeholder: :Email
+            = f.submit "Add Collaborator", class: "btn btn-success"

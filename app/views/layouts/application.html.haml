@@ -1,0 +1,39 @@
+!!!
+%html
+  %head
+    %title Workspace
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    .container
+      %nav.navbar.bg-faded.fixed-top
+        %h3= link_to "Home", root_path, class: "align-left close-links", id: "home"
+        - if !user_signed_in?
+          %h4
+            = link_to "Sign Up", new_user_registration_path, class: "align-right"
+            = link_to "Sign In", new_user_session_path, class: "align-right"
+        - else
+          %h4.align-right= link_to "Sign Out", destroy_user_session_path, :method => :delete
+          - if current_user.standard? == false
+            %h4.align-right.role= link_to "#{current_user.role} user", downgrade_path
+          - else
+            %h4= link_to "Upgrade to Premium!", new_charge_path, class: "align-right role"
+          %h4.align-right= current_user.username
+        %form.form-inline.align-right.search
+          %input.form-control.mr-sm-2{:placeholder => "Search", :type => "text"}/
+          %button.btn.btn-outline-success.my-2.my-sm-0{:type => "submit"} Search
+    .row
+      #sidebar.col-md-2
+        .nav.nav-stacked
+          %h1= link_to "Wikis", wikis_path
+          %h4= link_to "Create a Wiki", new_wiki_path
+          - if user_signed_in?
+            - if current_user.wikis.empty?
+              %h3 You have no wikis
+            - else
+              %h3 Your Wikis
+              - current_user.wikis.each do |w|
+                %h4
+                  \-#{link_to w.title, wiki_path(w.slug)}-
+      = yield

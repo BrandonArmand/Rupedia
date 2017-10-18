@@ -31,6 +31,7 @@ gem 'stripe'
 gem 'figaro', 1.0
 gem 'redcarpet'
 gem 'friendly_id', '~> 5.1.0'
+gem 'haml'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

@@ -1,0 +1,6 @@
+.container
+  .col-md-10
+    - @wikis.each_with_index do |w, i|
+      .row
+        %h3= link_to w.title, wiki_path(w)
+        %p= truncate(w.body, length: 400)

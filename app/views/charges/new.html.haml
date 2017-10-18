@@ -1,0 +1,7 @@
+.container
+  .jumbotron.flex-column
+    %h1 Upgrade to a Premium User for just $10
+    %h2 and create private wiki's that only you, and your friends can touch!
+    .align-right
+      = form_tag charges_path do
+        %script.stripe-button{"data-amount" => @stripe_btn_data[:amount], "data-description" => @stripe_btn_data[:description], "data-key" => @stripe_btn_data[:key], :src => "https://checkout.stripe.com/checkout.js"}

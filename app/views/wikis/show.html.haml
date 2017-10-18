@@ -1,0 +1,28 @@
+.container
+  .row
+    .col-xs-12.col-md-6.col-lg-8.col-xl-10
+      %h1= @wiki.title
+      %p= markdown(@wiki.body)
+    .col-md-12.col-lg-4.wiki-info
+      .info-box
+        %h3
+          Created By #{@wiki.user.username}
+        %h4
+          Private Wiki: #{@wiki.private}
+        %h5
+          %em
+            Created at #{@wiki.created_at}
+        %h3 Collaborators:
+        .info-collaborators
+          %p
+            - @collab_users.each do |w|
+              = w.username + ", "
+              - if user_signed_in?
+                - if policy(@wiki).destroy?
+                  = link_to 'delete', wiki_collaborator_path(@wiki, w.id), :method => :delete, class: "delete", data: { confirm: 'Are you sure you want to remove this user as a collaborator' }
+        .buttons
+          - if user_signed_in?
+            - if policy(@wiki).update?
+              = link_to "Edit Wiki", edit_wiki_path(@wiki), class: 'btn btn-info'
+            - if policy(@wiki).destroy?
+              = link_to "Delete", @wiki, method: :delete, class: "delete", data: { confirm: 'Are you sure you want to delete the wiki?' }
